@@ -4,6 +4,9 @@ class SnackBarWidget {
   static void show(BuildContext context, message, Color color) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        clipBehavior: Clip.hardEdge,
+        duration: const Duration(seconds: 1),
+        dismissDirection: DismissDirection.horizontal,
         content: Text(
           message,
           style: const TextStyle(

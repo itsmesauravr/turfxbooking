@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:turfxbooking/app/screens/booking/view/view_model/booking_view_model.dart';
+import 'package:turfxbooking/app/screens/booking/view_model/booking_view_model.dart';
 import 'package:turfxbooking/app/screens/email_otp/view/otp_form_page.dart';
 import 'package:turfxbooking/app/screens/home/services/location_services.dart';
 import 'package:turfxbooking/app/screens/home/view/home_page.dart';

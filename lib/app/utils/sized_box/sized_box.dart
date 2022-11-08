@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class AppSizedBox {
   static const kHeight5 = SizedBox(
@@ -36,5 +36,8 @@ class AppSizedBox {
   );
   static const kWidth10 = SizedBox(
     width: 10,
+  );
+  static const kWidth20 = SizedBox(
+    width: 20,
   );
 }

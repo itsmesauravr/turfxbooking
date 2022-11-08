@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:turfxbooking/app/screens/booking/view/booking_screen.dart';
+import 'package:turfxbooking/app/screens/booking/view_model/booking_view_model.dart';
 import 'package:turfxbooking/app/screens/details/widgets/text_details.dart';
 import 'package:turfxbooking/app/screens/home/view_model/home_view_model.dart';
 import 'package:turfxbooking/app/screens/widgets/new_box/new_box.dart';
@@ -8,12 +10,15 @@ import 'package:turfxbooking/app/utils/colors/colors.dart';
 import 'package:turfxbooking/app/utils/sized_box/sized_box.dart';
 
 class BottomBoxWidget extends StatelessWidget {
-  const BottomBoxWidget({super.key, required this.selectedIndex});
+  BottomBoxWidget({super.key, required this.selectedIndex});
 
   final int selectedIndex;
+  final railWayTime = int.parse(DateFormat.H().format(DateTime.now()));
   @override
   Widget build(BuildContext context) {
     final homePro = Provider.of<HomeViewModel>(context);
+    final bookPro = Provider.of<BookingViewModel>(context);
+    final size = MediaQuery.of(context).size;
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -21,6 +26,7 @@ class BottomBoxWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -73,7 +79,7 @@ class BottomBoxWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    AppSizedBox.kHeight10,
+                    AppSizedBox.kHeight20,
                     NewBox(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -152,65 +158,28 @@ class BottomBoxWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    AppSizedBox.kHeight10,
-                    NewBox(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "Turf Timings",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            AppSizedBox.kHeight10,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "Timings ",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Text(
-                                  " 5:00 AM - 12:00 AM",
-                                  style: TextStyle(
-                                    color: AppColors.kBlackColor,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    AppSizedBox.kHeight10,
+                    AppSizedBox.kHeight20,
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => BookingScreenWidget(
-                                selectedIndex: selectedIndex),
+                              selectedIndex: selectedIndex,
+                            ),
                           ),
                         );
+                        bookPro.disposes();
+                        bookPro.totalSlot(selectedIndex, context, railWayTime);
                       },
-                      child: NewBox(
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Text(
-                            "Book your court",
-                            style: TextStyle(
-                              color: AppColors.kRedColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w900,
+                      child: SizedBox(
+                        height: size.height * 0.08,
+                        child: NewBox(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Book Your Turf",
+                              style: TextStyle(color: AppColors.kRedColor),
                             ),
                           ),
                         ),

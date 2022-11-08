@@ -39,7 +39,7 @@ class GridViewBuilderWidget extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: size.height * 0.199,
+                    height: size.height * 0.159,
                     child: NewBox(
                       child: CarouselSlider(
                         items: [
@@ -75,8 +75,9 @@ class GridViewBuilderWidget extends StatelessWidget {
                   AppSizedBox.kHeight10,
                   Expanded(
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        AppSizedBox.kHeight5,
                         Icon(
                           homePro.homeDatas[index].turfCategory!.turfBadminton!
                               ? Icons.sports_tennis_outlined
@@ -90,16 +91,20 @@ class GridViewBuilderWidget extends StatelessWidget {
                           size: 14,
                           color: AppColors.kRedColor,
                         ),
-                        Text(
-                          homePro.homeDatas[index].turfName.toString(),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          softWrap: false,
-                          style: TextStyle(
+                        AppSizedBox.kWidth10,
+                        AppSizedBox.kHeight5,
+                        Expanded(
+                          child: Text(
+                            homePro.homeDatas[index].turfName.toString(),
                             overflow: TextOverflow.ellipsis,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.kBlackColor,
+                            maxLines: 1,
+                            softWrap: false,
+                            style: TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.kBlackColor,
+                            ),
                           ),
                         ),
                         Row(
